@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4d5w601jrl4q"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_logic.gd" id="1_panhf"]
+[ext_resource type="PackedScene" uid="uid://bg2suai3qeb58" path="res://scenes/stuff/globular_orb.tscn" id="2_o8gpl"]
+[ext_resource type="PackedScene" uid="uid://1jbvnxh3r0uu" path="res://scenes/stuff/ui.tscn" id="3_riu3p"]
+[ext_resource type="AudioStream" uid="uid://oe3g37umuh05" path="res://assets/audio/music_stage_1.mp3" id="4_puanx"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_panhf")
+enemy_types = Array[PackedScene]([ExtResource("2_o8gpl")])
+time = 20
+
+[node name="UI" parent="." instance=ExtResource("3_riu3p")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -5
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.356863, 0.356863, 0.356863, 1)
+
+[node name="EnemyTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="TimeTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="MusicLoopTimer" type="Timer" parent="."]
+wait_time = 2.11
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_puanx")
+
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="timeout" from="TimeTimer" to="." method="_on_time_timer_timeout"]
+[connection signal="timeout" from="MusicLoopTimer" to="." method="_on_music_loop_timer_timeout"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://8uxun6fv8kga"]
+
+[ext_resource type="Script" path="res://scenes/stuff/cellular_orb.gd" id="1_ouwrd"]
+[ext_resource type="SpriteFrames" uid="uid://dg7hixgm2a2l7" path="res://assets/cellular-orb.aseprite" id="2_t88if"]
+[ext_resource type="AudioStream" uid="uid://cwtqmu2e2w4pg" path="res://assets/audio/explode.wav" id="3_rkp0x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_si8wq"]
+radius = 30.0
+
+[node name="CellularOrb" type="Area2D" groups=["enemies"]]
+script = ExtResource("1_ouwrd")
+speed = 225
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 3)
+scale = Vector2(2.5, 2.5)
+sprite_frames = ExtResource("2_t88if")
+animation = &"nothing"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_si8wq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rkp0x")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

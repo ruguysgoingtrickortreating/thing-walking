@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2wja7c6241uk"]
+
+[ext_resource type="Script" path="res://scenes/stuff/individual.gd" id="1_137k5"]
+[ext_resource type="SpriteFrames" uid="uid://3qjg1t231fnp" path="res://assets/individual.aseprite" id="2_fyt70"]
+[ext_resource type="SpriteFrames" uid="uid://s2jkjtsa7f81" path="res://assets/box-of-pain.aseprite" id="3_vodc6"]
+[ext_resource type="AudioStream" uid="uid://cngxq7e3qviv2" path="res://assets/audio/death.wav" id="4_3o6f3"]
+[ext_resource type="AudioStream" uid="uid://bnhghmwqcpbuo" path="res://assets/audio/hurt.wav" id="5_d04um"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02l62"]
+size = Vector2(70, 70)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7omkb"]
+size = Vector2(140, 140)
+
+[node name="Individual" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_137k5")
+speed = 20000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_02l62")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("2_fyt70")
+animation = &"idle"
+
+[node name="KickDetector" type="Area2D" parent="."]
+position = Vector2(115, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KickDetector"]
+shape = SubResource("RectangleShape2D_7omkb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="KickDetector"]
+visible = false
+position = Vector2(2, 0)
+scale = Vector2(4.4, 4.4)
+sprite_frames = ExtResource("3_vodc6")
+
+[node name="KickTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3o6f3")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_d04um")
+
+[connection signal="timeout" from="KickTimer" to="." method="_on_kick_timer_timeout"]

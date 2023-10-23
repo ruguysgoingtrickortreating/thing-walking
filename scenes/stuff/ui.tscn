@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://1jbvnxh3r0uu"]
+
+[ext_resource type="SpriteFrames" uid="uid://dpid2teagdwbp" path="res://assets/score-backboard.aseprite" id="1_4ado1"]
+[ext_resource type="FontFile" uid="uid://dpslrqmukru5x" path="res://assets/font_thin.png" id="1_bbqhn"]
+[ext_resource type="Texture2D" uid="uid://cou27ygwyw7lb" path="res://assets/continue.aseprite" id="2_eis4v"]
+[ext_resource type="SpriteFrames" uid="uid://c0fd15md4dxka" path="res://assets/health_back.aseprite" id="4_sva4f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70ivq"]
+size = Vector2(48, 32)
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="TimeSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 591)
+scale = Vector2(3, 3)
+sprite_frames = ExtResource("1_4ado1")
+autoplay = "default"
+
+[node name="Continue" type="Sprite2D" parent="TimeSprite"]
+visible = false
+texture = ExtResource("2_eis4v")
+
+[node name="Area2D" type="Area2D" parent="." groups=["level_switch"]]
+position = Vector2(576, 591)
+scale = Vector2(3, 3)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_70ivq")
+
+[node name="TimeLabel" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -95.0
+offset_right = -24.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(4, 4)
+theme_override_fonts/font = ExtResource("1_bbqhn")
+theme_override_font_sizes/font_size = 128
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HealthSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1048, 64)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("4_sva4f")
+animation = &"3"
+autoplay = "3"
+frame_progress = 0.389139

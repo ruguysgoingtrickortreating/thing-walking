@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg2suai3qeb58"]
+
+[ext_resource type="Script" path="res://scenes/stuff/globular_orb.gd" id="1_h77b3"]
+[ext_resource type="SpriteFrames" uid="uid://k4xflk70euow" path="res://assets/globular-orb.aseprite" id="1_tj0xv"]
+[ext_resource type="AudioStream" uid="uid://cwtqmu2e2w4pg" path="res://assets/audio/explode.wav" id="3_02rf4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_si8wq"]
+radius = 30.0
+
+[node name="GlobularOrb" type="Area2D" groups=["enemies"]]
+script = ExtResource("1_h77b3")
+speed = 300
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 3)
+scale = Vector2(2.5, 2.5)
+sprite_frames = ExtResource("1_tj0xv")
+animation = &"explode"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_si8wq")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_02rf4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

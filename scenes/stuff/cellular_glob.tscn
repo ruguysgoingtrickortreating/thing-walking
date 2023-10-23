@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp5yc3wt5g0hw"]
+
+[ext_resource type="SpriteFrames" uid="uid://kwyvtkx1t2py" path="res://assets/cellular-glob.aseprite" id="1_7lph3"]
+[ext_resource type="Script" path="res://scenes/stuff/cellular_glob.gd" id="1_sponi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kcnki"]
+radius = 12.0416
+
+[node name="CellularGlob" type="Area2D"]
+script = ExtResource("1_sponi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_kcnki")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+sprite_frames = ExtResource("1_7lph3")
+animation = &"nothing"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
