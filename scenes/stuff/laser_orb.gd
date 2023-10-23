@@ -31,3 +31,4 @@ func _on_laser_detector_body_entered(body):
 		body.take_damage()
 		$Laser.queue_free()
 		
+		# LARGE MEN!!!
