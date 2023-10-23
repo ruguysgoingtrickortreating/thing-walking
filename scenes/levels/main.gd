@@ -66,3 +66,5 @@ func player_transition():
 	$Individual.disable_controls = true
 	$Individual/AnimatedSprite2D.self_modulate = Color(1,1,1,1)
 	$Individual/KickDetector/AnimatedSprite2D.visible = false
+
+#   more like glizzhub
